@@ -9,11 +9,11 @@ exports.all = (req, res) => {
     })
 }
 
-exports.todoDetails = (req, res) => {
+exports.todoDetails = (req, res, next) => {
     const id = req.params.id;
-    Todo.findById(12121212, (err, obj) => {
+    Todo.findById(id, (err, obj) => {
         if (err) {
-            res.send('error')
+            return next(err);
         }
         res.send(obj)
     })
@@ -30,5 +30,27 @@ exports.create = (req, res) => {
             return next(err);
         }
         res.send('Todo added successfully')
+    })
+}
+
+exports.todoUpdate = (req, res, next) => {
+    const id = req.params.id;
+    const name = req.body.name;
+    Todo.findByIdAndUpdate(id, { $set: { name } }, { new: true }, (err, obj) => {
+        if (err) {
+            return next(err);
+        }
+        res.send('Todo updated.').status(200);
+    })
+}
+
+exports.todoDelete = (req, res, next) => {
+    debugger
+    const id = req.params.id;
+    Todo.findByIdAndDelete(id, (err, obj) => {
+        if (err || !obj) {
+            return next(err || 'Cannot find todo.');
+        }
+        res.send('Todo deleted.').status(200);
     })
 }
