@@ -30,5 +30,5 @@ function myFun() {}
 
 // Added by Husni
 function getDetails(param1) {
-    return param1;
+    return param1 + ' -- ';
 }
