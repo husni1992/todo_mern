@@ -29,6 +29,7 @@ app.listen(port, () => {
 function myFun() {}
 
 // Added by Husni
-function getDetails(param1) {
-    return param1 + ' -- ';
+function getDetails(param1,param2,param3) {
+    
+    return param1 + param2;
 }
